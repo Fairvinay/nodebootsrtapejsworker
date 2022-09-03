@@ -4,6 +4,7 @@ show's the basic UI with header foot and main content from ejs template in parti
 
 the ejs template uses semantic-ui/2.4.1/semantic.min.css
 
+it also use's .env to identify the routes directory to be served from 
 
 
 this also take bootstaps js and css are included using 
