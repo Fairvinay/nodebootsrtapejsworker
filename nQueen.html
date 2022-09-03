@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link id="bootStrap" rel="stylesheet" href="css/bootstrap.min.css"/>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+  <title>n-queens solver</title>
+ <style> 
+#bootStrap {
+    z-index: 0
+}
+</style>
+    <script src="js/jquery.slim.min.js"  crossorigin="anonymous"></script>	
+   <script src="js/bootstrap.min.js"  crossorigin="anonymous"></script>
+
+ <script type="queenWorker.js"></script>
+  <script>
+  
+  /*let res = Services.io.getProtocolHandler("resource").QueryInterface(Ci.nsIResProtocolHandler);
+   res.setSubstitution("rawr", Services.io.newURI('file:///queenWorker.js',null,null));
+ */
+const waitForBootSt = 
+  (doc) => { 
+ 
+  var num = parseInt(prompt("enter num"));
+  var all = (1 << num) - 1;
+  count = 0;
+  for (var i = 0; i < num; i++) {
+    var cols = 2 ** i;
+    var ld = 2 ** (i + 1);
+    var rd = 0;
+    if (i > 0) {
+      rd = 2 ** (i - 1);
+    }
+    var myWorker = new Worker('queenWorker.js');
+  console.log("myWorker loalded " + myWorker );
+  const workPrinter = (data) => {
+	    var div = document.createElement('div'); //container to append to
+  	   
+            let contain =  ' ';
+	    let row = '<div class="row"> ' +
+			'<div class="col-sm-2  m-2"> <label class="btn-sm btn-primary">worker count: </label>'+
+			'<span class="badge text-center">'+ data +'</span></div>' +
+			  
+			   '</div>'; 
+	    let end = '';
+	    div.innerHTML = contain + row + end;
+			return div;
+      };
+    myWorker.addEventListener('message', function(e) {
+      count += i  //e.data;
+      console.log('e : ', JSON.stringify(e));
+      console.log('worker count: ', e.data);
+	var elem = doc.getElementById('content');
+        var div = workPrinter(i);
+        if (div.children.length > 0) {
+    	  elem.appendChild(div.children[0]);
+        }
+	 // elem.insertAdjacentHTML("afterend",);
+    }, false);
+    myWorker.postMessage([ld, cols, rd, all]);
+     [ld, cols, rd, all].forEach((x) => { console.log(JSON.stringify(x));});
+  }
+ 
+  } ;
+
+function whencsslinkloads(csslink, whenload ){
+    console.log("Waiting BootStrap:");
+    
+    var intervalID = setInterval(
+        function(){
+            if (getComputedStyle(csslink).zIndex !== '0') {
+		 console.log(' css loaded ');
+		return;
+		}
+            clearInterval(intervalID);
+            csslink.onload = null;
+            whenload();
+	     console.log('insidse invterval ');
+        },
+        125 // check for if it has loaded 8 times a second
+    );
+     console.log('invtervalID ',intervalID );
+    var watchInterval = () => {   console.log(' watching Interval ID:  ',intervalID ); } ; 
+    var stopInterval = (id) => {  
+			console.log(' stoping .... ',id);
+      			 clearInterval(id); 
+		       } ; 
+    var promis = new Promise( (res , rej ) => { 
+                    if (intervalID < 300){
+			res();
+			}
+		    else {
+		        rej(intervalID);
+		    } 
+                  });
+    promis.then(watchInterval()  , stopInterval(intervalID) );
+    csslink.onload = function(){
+        clearInterval(intervalID);
+        csslink.onload = null;
+        if ( typeof whenload ==='function') {  whenload();}
+    }
+}
+whencsslinkloads(
+    document.getElementById('bootStrap'),
+    waitForBootSt(window.document)
+)
+
+  
+  </script>
+</head>
+
+<body>
+ <div id="content" class="container"> 
+	
+ </div>
+ 
+   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ -->
+</body>
+
+</html>

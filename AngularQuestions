@@ -1,0 +1,167 @@
+
+These kind of interview questions Client may ask, please be prepare along with your regular preparation
+
+Ext JS   View Port , Model  all in static Ext.application( { extend: '', name: '', 	mainView:'' }); xtype is important.
+https://youtu.be/Y_bVlSYbEeg?list=PL8p2I9GklV47EtM9MtAncMf4XLDJjaLkz 
+
+const example with Date 
+const a =  {   // var not allowed 
+	 options: {             
+        weekday: "short",
+        year: "numeric",
+        month: "2-digit",
+        day: "numeric"
+    },
+    //console.log(date.toLocaleDateString("en", options)); //en is language option, you may specify..
+	walk() { console.log("walk " +this);}
+};  
+const walk = a.walk;
+walk();  // prints walk undefined in case of use strict defined default , else walk [object Window]
+Object.keys(a);
+Object.defineProperty(this, 'defaultLoc', get: function() { return defaultLoc});
+Error bulit in object 
+Async / Await 
+arrow functions inherit the this keyword in the callback function , arrow functions don't rebind the this keyoword
+----------------WEB Workers in ES6  Server should be running , browser will support
+Modern browsers improved upon this by using either process-per-site-instance or different threads per tab. Although dedicated 
+threads improved the responsiveness of webpages, it still left each tab unable to handle multiple scripts running at once.
+
+Web Workers not allowed without server 
+--------------------PROXY Configurations-----------------------------------------------
+
+First thing you need is this proxy.config.json. We are defining the target for all the URLs starts with /api here.
+{
+    "/api/*": {
+    "target": "http://localhost:3070",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
+
+Add this ng serve — proxy-config proxy.conf.json to the start script in package.json
+  also other way 
+            serve: { 
+				"options": {
+				  "proxyConfig": "proxy.conf.json"
+				  }
+			  }
+
+Multiple app entries to one API endpoint ----- proxy.config.js 
+
+In that case, we need to define proxy.config.js instead of proxy.config.json. Don’t forget to add that to angular.json.
+proxy.config.js 
+         const PROXY_CONFIG = [
+				{
+					context: [
+						"/userapi",
+						"/settingsapi",
+						"/productapi",
+					],
+					target: "http://localhost:3070",
+					secure: false
+				}
+			]
+
+module.exports = PROXY_CONFIG;
+ -------------------------Angular JSON 
+         serve: { 
+				"options": {
+				  "proxyConfig": "proxy.conf.js"
+				  }
+			  }
+new oska C# language ....
+------------------------------------------------------------------------------------------------------------------------
+
+1.	What is Angular? 
+2.	Difference between angular versions? (Sometimes ask this) 
+╔════════════════════════════╦════════════════════════════╗
+║                            ║                            ║
+║ Angular-CLI version        ║ Angular version            ║
+║                            ║                            ║
+╠════════════════════════════╬════════════════════════════╣
+║ angular-cli@0.1.0          ║ Angular 2                  ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@1.1.0         ║ Angular 4.0.0              ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@1.4.10        ║ Angular 4.2.4              ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@1.5.0         ║ Angular 4.4                ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@1.7.4         ║ Angular 5.2.0              ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@6.2.8         ║ Angular 6.1.0              ║
+╠════════════════════════════╬════════════════════════════╣
+║ @angular/cli@7.3.9         ║ Angular 7.2.0              ║
+╚════════════════════════════╩════════════════════════════╝
+
+3.	What is directive? 
+4.	What is life cycle of angular? 
+5.	JIT vs AOT compilation? 
+6.	What is package.json? 
+7.	Different types of data bindings? 
+8.	Angular life cycle hooks? 
+9.	Routing in details? 
+10.	Interceptors? 
+11.	How to pass data from parent to child and child to parent? 
+12.	What is Observable? 
+13.	Observable vs promise? 
+14.	Lazy loading? How to implement? 
+15.	Route guard? 
+16.	Route parameters? 
+17.	What is service? 
+18.	What is httpclient? 
+19.	Error Handling? 
+20.	Reactive forms and template driven forms? 
+21.	What is pipe? 
+22.	May ask some scenario-based questions? 
+23.	Difference between Angular 9 and lower version 
+24.	List out Components in Angular, And explain if you have created any custom directive? 
+25.	Explain entire flow of Data Binding which happens from Components to DOM? 
+26.	How can we update project dependencies? Explain two scenarios?  
+27.	Jot down steps to integrate any third party (like Google Maps, power bi reports) pages in Angular 9? 
+28.	How to import /Export components in Angular? 
+29.	Can we write a DOM objects into Angular?   
+30.	How can we do validation in angular? 
+ 
+Microsoft client interview 
+Angular  
+What is @Input and @Output? 
+How components interact with each other? 
+What are route guards? 
+What are observables? 
+What is lazy loading?How to implement it? 
+ 
+SQL 
+difference between functions and stored procedures 
+Why do we use sql profiler? 
+How to improve sql stored procedures performance? 
+Global temporay table 
+difference between union and union all 
+
+C# 
+get, post used for? 
+can we get using post? 
+interface and abstract class 
+IEnumarable interface
+ 
+Thanks
+Somashekar
+-------------------------------------------------------------------------------------------
+
+ActivatedRoute vs ActivatedRouteSnapshot
+Since ActivatedRoute can be reused, ActivatedRouteSnapshot is an immutable object representing a particular version 
+of ActivatedRoute. It exposes all the same properties as ActivatedRoute as plain values, while ActivatedRoute exposes them as observables.
+ActivatedRoute requires that you subscribe. Which requires that you unsubscribe. Which requires that you implement OnDestroy.
+ This is a lot of overhead for a static route.
+If you use ActivatedRouteSnapshot and have a parameter in your route definition like product/:id, then you will 
+ not get any new ID if the user changes them or your page does. Snapshot means that it was when OnInit ran, this was the state 
+ it was in at that point in time. So, any changes will be ignored.
+ActivatedRouteSnapshot is an immutable data structure.
+ActivatedRouteSnapshot is representing the state of the router at a particular moment in time.
+ActivatedRoute is similar to ActivatedRouteSnapshot, except that it represents the state of the router changing over time.
+Every node in ActivatedRouteSnapshot tree knows about the "consumed" URL segments, the extracted parameters, and the resolved data.
+When using snapshot - doesn't show the right ID when clicking. So your statement here is incorrect.
+Use the Snapshot if you only need the initial value of the parameter once during the component's initialization, and don't 
+expect the URL to change while the user is still on that same component.
+ActivatedRouteActivatedRouteSnapshotAngular
