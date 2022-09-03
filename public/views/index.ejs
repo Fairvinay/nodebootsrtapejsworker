@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head'); %>
+  <script > 
+	var root = document.documentElement;
+    $(':root').css("--windowHeight", $( window ).height() );
+    console.log(" windowHeight ", $( window ).height() );
+    $( window ).resize(function() {
+	var hei = $( window ).height() -100;
+       $(':root').css("--containerHeight", $('.footLine').css("margin-top",hei ));
+     });
+   </script>
+  <style> 
+     .footLine{
+      margin-top: calc( var(--windowHeight) -100 ) +'px';
+    }
+ </style>
+</head>
+<body class="container">
+
+<header>
+  <%- include('./partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <h1> Explore NODE </h1>
+    <p> Workers and other Path's </p>
+
+     <%if (errorMessage) { %>
+	  <%- include('./partials/error'); %>
+     <% } else { %>
+  		  <p>Hey terra!</p>
+     <% } %>
+   </div>
+</main>
+
+<footer>
+  <%- include('./partials/footer'); %>
+</footer>
+
+</body>
+</html>

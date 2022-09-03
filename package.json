@@ -1,0 +1,30 @@
+{
+  "name": "bascidom",
+  "version": "1.0.0",
+  "description": "basic bootstrap",
+  "main": "basic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "basic"
+  ],
+  "author": "Vinayak Anvear",
+  "license": "ISC",
+  "dependencies": {
+    "angular-http-server": "^1.10.0",
+    "bootstrap": "^4.5.0",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "http-errors": "^1.8.1",
+    "http-server": "^14.0.0",
+    "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.19",
+    "simple-json-db": "^1.2.3",
+    "uuid": "^8.3.2"
+  }
+}

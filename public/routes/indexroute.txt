@@ -1,0 +1,23 @@
+
+
+const creatError = require('http-errors')
+
+const JSONdb = require('simple-json-db')
+
+const db = new JSONdb(process.env.JSON_DB_PATH, { asyncWrite: true })
+
+
+exports.register = async(req, res, next) => { 
+  try { 
+   console.log("Inside Register function ")
+    const { email , password } = req.body 
+    // this is just a demo code and not for prod 
+    db.set(email, JSON.stringify({id: uuid(), username: `Demo username ${uuid()}`, password }))
+    res.status(201) 
+    res.send('Account created successfully') 
+   }
+   catch (error) 
+    { 
+      next(error) 
+   } 
+}

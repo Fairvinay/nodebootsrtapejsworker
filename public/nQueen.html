@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>n-queens solver</title>
+</head>
+
+<body>
+
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>	
+   
+  <script type="queenWorker.js"></script>
+  <script>
+  
+  /*let res = Services.io.getProtocolHandler("resource").QueryInterface(Ci.nsIResProtocolHandler);
+   res.setSubstitution("rawr", Services.io.newURI('file:///queenWorker.js',null,null));
+ */
+  var num = parseInt(prompt("enter num"));
+  var all = (1 << num) - 1;
+  count = 0;
+  for (var i = 0; i < num; i++) {
+    var cols = 2 ** i;
+    var ld = 2 ** (i + 1);
+    var rd = 0;
+    if (i > 0) {
+      rd = 2 ** (i - 1);
+    }
+    var myWorker = new Worker('queenWorker.js');
+	myWorker.callbacks = {};
+  const workPrinter = (data) => {
+          
+		    let row = '<div class="row"> ' +
+			  '<span class="badge small" > worker count: ' + data + '</span>'+
+			   '</div>'; 
+			
+			return   row ;
+      };
+   
+   var htmlData = "";
+    let contain =  '<div class="container"> ';
+	let end = '</div>';
+    myWorker.addEventListener('message', function(e) {
+      count += e.data;
+      console.log('worker count: ', e.data);
+	  
+	  htmlData +=   workPrinter(e.data) ;
+    }, false);
+	const callback = () => console.log('htmlData: ',htmlData);
+	  myWorker.callbacks[0] = callback;
+    myWorker.postMessage([ld, cols, rd, all] );
+	
+	  $(document).ready(function () {
+	    var continer  = $("#cont"); 
+		 $("#cont").html(contain + htmlData + end);
+	   //continer.value =  contain + htmlData + end; 
+	});
+  }
+  
+  </script>
+  <!-- https://gist.github.com/therightstuff/eb415798b0e30866fe85d66af68969cf -->
+    <div id="cont" class="container"> 
+	 </div>
+  
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+
+   if(fileResolve && fileExists ){
+	
+         var actualFilewithExt = fileResolve.substring(fileResolve.lastIndexOf('\\')+1);
+ 	console.log("actualFilewithExt  " +actualFilewithExt );
+	fileName = actualFilewithExt
+   }
+   else {
+	console.log("request resource not found sedning default response ");
+	
+   } 
+    res.sendFile( fileName, options , function(err) {
+		 if (err) {
+		console.log('Error: ', err)
+   		   next(err)
+  	         } else {
+    		   console.log('Sent:', fileName)
+   		 }
+    	       });
+  
+    console.log("Index sent back function ")
+   // res.send('Account created successfully') 
+    /* */
